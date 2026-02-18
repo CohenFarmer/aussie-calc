@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HECS/HELP Repayment Calculator 2026 | Australian Student Loan Repayment Estimator</title>
+<meta name="description" content="Free HECS-HELP repayment calculator. Estimate your compulsory student loan repayments based on your income. Updated with 2025-26 ATO thresholds and rates.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--bg:#F6F3EE;--card:#FFF;--text:#1A1A1A;--text2:#5C5C5C;--accent:#1B6B4A;--accent-light:#E8F5EE;--accent-hover:#145236;--border:#E2DED6;--highlight:#D4A853;--highlight-light:#FFF8E7;--shadow:0 1px 3px rgba(0,0,0,.04),0 4px 12px rgba(0,0,0,.06);--shadow-lg:0 4px 12px rgba(0,0,0,.05),0 16px 40px rgba(0,0,0,.08);--radius:12px;--radius-sm:8px}body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}.page-header{text-align:center;padding:48px 24px 32px;max-width:680px;margin:0 auto}.page-header .badge{display:inline-block;background:var(--accent-light);color:var(--accent);font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:20px}.page-header h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,5vw,42px);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}.page-header p{font-size:16px;color:var(--text2);max-width:520px;margin:0 auto}.container{max-width:680px;margin:0 auto;padding:0 20px 80px}.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);padding:32px;margin-bottom:20px}.card-title{font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;margin-bottom:24px}.form-group{margin-bottom:24px}label{display:block;font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}.input-wrapper{position:relative}.input-wrapper .prefix{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:20px;font-weight:500;color:var(--text2);pointer-events:none}input[type="text"]{width:100%;padding:14px 16px 14px 36px;font-family:'DM Sans',sans-serif;font-size:22px;font-weight:600;border:2px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);transition:all .2s;outline:none}input[type="text"]:focus{border-color:var(--accent);background:#fff;box-shadow:0 0 0 4px rgba(27,107,74,.1)}.calculate-btn{width:100%;padding:16px 24px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;margin-top:8px}.calculate-btn:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 4px 12px rgba(27,107,74,.3)}.results{background:var(--card);border-radius:var(--radius);border:2px solid var(--accent);box-shadow:var(--shadow-lg);padding:32px;margin-bottom:20px;display:none;animation:slideUp .4s cubic-bezier(.16,1,.3,1)}.results.active{display:block}@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}.result-hero{text-align:center;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--border)}.result-hero .label{font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}.result-hero .amount{font-family:'Fraunces',Georgia,serif;font-size:clamp(36px,8vw,52px);font-weight:700;color:var(--accent);letter-spacing:-.02em;line-height:1.1}.result-hero .sub{font-size:14px;color:var(--text2);margin-top:6px}.result-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0}.result-row:not(:last-child){border-bottom:1px solid var(--border)}.result-row .row-label{font-size:14px;color:var(--text2)}.result-row .row-value{font-size:16px;font-weight:600}.concession-note{margin-top:20px;padding:16px;background:var(--highlight-light);border-radius:var(--radius-sm);border-left:4px solid var(--highlight)}.concession-note p{font-size:13px;color:#6B5A20;line-height:1.5}.concession-note strong{font-weight:600;color:#4A3D10}.rate-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}.rate-table th{text-align:left;font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;border-bottom:2px solid var(--border)}.rate-table td{padding:8px 12px;border-bottom:1px solid var(--border)}.rate-table tr.active-row{background:var(--accent-light);font-weight:600}.rate-table tr.active-row td{color:var(--accent)}.disclaimer{text-align:center;padding:24px 20px;font-size:12px;color:var(--text2);line-height:1.6;max-width:560px;margin:0 auto}.disclaimer a{color:var(--accent)}.back-link{display:inline-block;margin-bottom:16px;font-size:14px;color:var(--accent);text-decoration:none;font-weight:500}.back-link:hover{text-decoration:underline}.faq-section{margin-top:40px}.faq-section h2{font-family:'Fraunces',Georgia,serif;font-size:22px;font-weight:600;margin-bottom:20px;text-align:center}.faq-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}.faq-item summary{padding:16px 20px;font-size:15px;font-weight:500;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary::after{content:'+';font-size:20px;font-weight:300;color:var(--text2);transition:transform .2s}.faq-item[open] summary::after{transform:rotate(45deg)}.faq-item .faq-content{padding:0 20px 16px;font-size:14px;color:var(--text2);line-height:1.7}@media(max-width:600px){.card,.results{padding:24px 20px}}
+</style>
+<link rel="canonical" href="https://aussiecalc.com.au/hecs-calculator.html">
+<meta property="og:title" content="HECS/HELP Repayment Calculator 2026 — Australian Student Loan Estimator">
+<meta property="og:description" content="Estimate your compulsory HECS-HELP student loan repayments based on your income. Updated with 2025-26 ATO thresholds.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aussiecalc.com.au/hecs-calculator.html">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"HECS-HELP Repayment Calculator","url":"https://aussiecalc.com.au/hecs-calculator.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"}}
+</script>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="badge">2025–26 Tax Year</div>
+  <h1>HECS/HELP Repayment Calculator</h1>
+  <p>Estimate your compulsory HECS-HELP, VSL, SSL or TSL repayment based on your taxable income.</p>
+</div>
+
+<div class="container">
+  <a href="index.html" class="back-link">← All Calculators</a>
+
+  <div class="card">
+    <div class="card-title">Your Details</div>
+    <div class="form-group">
+      <label for="income">Annual Taxable Income</label>
+      <div class="input-wrapper">
+        <span class="prefix">$</span>
+        <input type="text" id="income" placeholder="e.g. 75,000" inputmode="numeric" autocomplete="off">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="debt">HECS/HELP Debt Balance (optional)</label>
+      <div class="input-wrapper">
+        <span class="prefix">$</span>
+        <input type="text" id="debt" placeholder="e.g. 30,000" inputmode="numeric" autocomplete="off">
+      </div>
+    </div>
+    <button class="calculate-btn" onclick="calculate()">Calculate Repayment</button>
+  </div>
+
+  <div class="results" id="results">
+    <div class="result-hero">
+      <div class="label">Annual Compulsory Repayment</div>
+      <div class="amount" id="annualRepayment">$0</div>
+      <div class="sub" id="weeklyRepayment"></div>
+    </div>
+    <div>
+      <div class="result-row"><span class="row-label">Taxable Income</span><span class="row-value" id="rIncome"></span></div>
+      <div class="result-row"><span class="row-label">Repayment Rate</span><span class="row-value" id="rRate"></span></div>
+      <div class="result-row"><span class="row-label">Annual Repayment</span><span class="row-value" id="rAnnual"></span></div>
+      <div class="result-row"><span class="row-label">Monthly (from pay)</span><span class="row-value" id="rMonthly"></span></div>
+      <div class="result-row"><span class="row-label">Fortnightly (from pay)</span><span class="row-value" id="rFortnight"></span></div>
+      <div id="debtNote"></div>
+    </div>
+
+    <div class="card-title" style="margin-top:28px;margin-bottom:8px">2025–26 Repayment Thresholds</div>
+    <table class="rate-table" id="rateTable">
+      <thead><tr><th>Repayment Income</th><th>Rate</th></tr></thead>
+      <tbody id="rateBody"></tbody>
+    </table>
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq-item">
+      <summary>When do I start repaying my HECS-HELP debt?</summary>
+      <div class="faq-content">You start making compulsory repayments through the tax system once your repayment income exceeds the minimum threshold, which is $54,435 for the 2025-26 income year. Repayment income includes your taxable income, any net investment losses, reportable fringe benefits, and reportable super contributions.</div>
+    </details>
+    <details class="faq-item">
+      <summary>How is my HECS repayment calculated?</summary>
+      <div class="faq-content">Your compulsory repayment is a percentage of your total repayment income — not just the portion above the threshold. The rate increases as your income rises, from 1% up to 10%. For example, if you earn $65,000 and the rate is 2%, your repayment is 2% of $65,000 = $1,300 for the year.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Does HECS indexation still apply?</summary>
+      <div class="faq-content">Yes. HELP debts are indexed annually on 1 June. From 1 June 2023 onwards, indexation is capped at the lower of CPI or the Wage Price Index (WPI), which limits the rate of increase. Previously, only CPI was used. This change was backdated to include the 2022-23 year.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Can I make voluntary repayments?</summary>
+      <div class="faq-content">Yes. You can make voluntary repayments at any time through the ATO. However, since 1 January 2024, the bonus for voluntary repayments has been removed — previously you could get a 5-10% bonus. Voluntary repayments now reduce your debt dollar-for-dollar with no additional bonus.</div>
+    </details>
+  </div>
+
+  <div class="disclaimer">
+    Based on 2025-26 HELP repayment thresholds from the ATO. This calculator provides estimates only and is not tax advice. Verify with the <a href="https://www.ato.gov.au/tax-rates-and-codes/study-and-training-loan-repayment-thresholds-and-rates" target="_blank">ATO website</a>.
+    <br><br><a href="index.html">← Back to all calculators</a>
+  </div>
+</div>
+
+<script>
+// 2025-26 HECS-HELP repayment thresholds and rates
+// Source: ATO study and training loan repayment thresholds
+const thresholds = [
+  { min: 0,      max: 54435,  rate: 0 },
+  { min: 54435,  max: 62850,  rate: 0.01 },
+  { min: 62851,  max: 66620,  rate: 0.02 },
+  { min: 66621,  max: 70618,  rate: 0.025 },
+  { min: 70619,  max: 74855,  rate: 0.03 },
+  { min: 74856,  max: 79346,  rate: 0.035 },
+  { min: 79347,  max: 84107,  rate: 0.04 },
+  { min: 84108,  max: 89154,  rate: 0.045 },
+  { min: 89155,  max: 94503,  rate: 0.05 },
+  { min: 94504,  max: 100174, rate: 0.055 },
+  { min: 100175, max: 106185, rate: 0.06 },
+  { min: 106186, max: 112556, rate: 0.065 },
+  { min: 112557, max: 119309, rate: 0.07 },
+  { min: 119310, max: 126467, rate: 0.075 },
+  { min: 126468, max: 134056, rate: 0.08 },
+  { min: 134057, max: 142100, rate: 0.085 },
+  { min: 142101, max: 150626, rate: 0.09 },
+  { min: 150627, max: 159663, rate: 0.095 },
+  { min: 159664, max: Infinity, rate: 0.10 },
+];
+
+function fmt(n){ return '$'+Math.round(n).toLocaleString('en-AU') }
+function fmtRate(r){ return (r*100)+'%' }
+
+function parseInput(id){
+  return parseInt(document.getElementById(id).value.replace(/[^0-9]/g,''))||0;
+}
+
+['income','debt'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',function(){
+    let v=this.value.replace(/[^0-9]/g,'');
+    if(v) this.value=parseInt(v).toLocaleString('en-AU');
+  });
+  document.getElementById(id).addEventListener('keydown',function(e){
+    if(e.key==='Enter') calculate();
+  });
+});
+
+function calculate(){
+  const income = parseInput('income');
+  const debt = parseInput('debt');
+  if(!income) return;
+
+  let bracket = thresholds.find(t=> income >= t.min && income <= t.max) || thresholds[thresholds.length-1];
+  const rate = bracket.rate;
+  let annual = Math.round(income * rate);
+
+  // Cap at remaining debt if provided
+  if(debt > 0 && annual > debt) annual = debt;
+
+  document.getElementById('results').classList.add('active');
+  document.getElementById('annualRepayment').textContent = fmt(annual);
+  document.getElementById('weeklyRepayment').textContent = annual > 0
+    ? `${fmt(Math.round(annual/26))} per fortnight · ${fmt(Math.round(annual/12))} per month`
+    : 'Your income is below the repayment threshold';
+  document.getElementById('rIncome').textContent = fmt(income);
+  document.getElementById('rRate').textContent = rate > 0 ? fmtRate(rate) : 'Nil (below threshold)';
+  document.getElementById('rAnnual').textContent = fmt(annual);
+  document.getElementById('rMonthly').textContent = fmt(Math.round(annual/12));
+  document.getElementById('rFortnight').textContent = fmt(Math.round(annual/26));
+
+  let debtNote = '';
+  if(debt > 0 && annual > 0){
+    const years = Math.ceil(debt / annual);
+    debtNote = `<div class="concession-note" style="margin-top:16px"><p><strong>Debt payoff estimate:</strong> At your current income, your ${fmt(debt)} HECS debt would take roughly <strong>${years} year${years!==1?'s':''}</strong> to repay through compulsory repayments alone (not accounting for indexation or income changes).</p></div>`;
+  }
+  document.getElementById('debtNote').innerHTML = debtNote;
+
+  // Rate table
+  const tbody = document.getElementById('rateBody');
+  tbody.innerHTML = thresholds.map(t=>{
+    const isActive = income >= t.min && income <= (t.max === Infinity ? 999999999 : t.max);
+    const maxLabel = t.max === Infinity ? '+' : ' – '+fmt(t.max);
+    const minLabel = fmt(t.min);
+    return `<tr class="${isActive?'active-row':''}"><td>${t.rate===0?'Below '+fmt(t.max):minLabel+maxLabel}</td><td>${t.rate===0?'Nil':fmtRate(t.rate)}</td></tr>`;
+  }).join('');
+
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+<div style="max-width:680px;margin:40px auto 0;padding:0 20px 48px"><div style="text-align:center;padding:24px;background:#fff;border:1px solid #E2DED6;border-radius:12px"><p style="font-family:Fraunces,Georgia,serif;font-size:16px;font-weight:600;margin-bottom:12px">More Australian Calculators</p><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center"><a href="stamp-duty-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">Stamp Duty</a><a href="hecs-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">HECS/HELP</a><a href="rental-yield-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">Rental Yield</a><a href="gst-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">GST</a><a href="super-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">Super</a><a href="pay-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">Take Home Pay</a></div><p style="margin-top:12px;font-size:11px;color:#5C5C5C"><a href="index.html" style="color:#1B6B4A">AussieCalc</a> · <a href="privacy.html" style="color:#5C5C5C">Privacy</a></p></div></div>
+</body>
+</html>

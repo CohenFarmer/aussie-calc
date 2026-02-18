@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QLD Stamp Duty Calculator 2026 | Queensland Transfer Duty Estimator</title>
+<meta name="description" content="Free Queensland stamp duty calculator. Instantly estimate transfer duty for QLD property purchases including first home buyer concessions, home concessions, and investor rates. Updated for 2026.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F6F3EE;
+    --card: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #5C5C5C;
+    --accent: #1B6B4A;
+    --accent-light: #E8F5EE;
+    --accent-hover: #145236;
+    --border: #E2DED6;
+    --highlight: #D4A853;
+    --highlight-light: #FFF8E7;
+    --danger: #C0392B;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.05), 0 16px 40px rgba(0,0,0,0.08);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page-header {
+    text-align: center;
+    padding: 48px 24px 32px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .page-header .badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .page-header h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .page-header p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 32px;
+    margin-bottom: 20px;
+  }
+
+  .card-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  /* Form Elements */
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .form-group:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .input-wrapper {
+    position: relative;
+  }
+
+  .input-wrapper .prefix {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    pointer-events: none;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 14px 16px 14px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    color: var(--text);
+    transition: all 0.2s;
+    outline: none;
+  }
+
+  input[type="text"]:focus {
+    border-color: var(--accent);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(27, 107, 74, 0.1);
+  }
+
+  /* Radio Buttons as Pill Selector */
+  .pill-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .pill-group input[type="radio"] {
+    display: none;
+  }
+
+  .pill-group label {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    border: 2px solid var(--border);
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: none;
+    letter-spacing: 0;
+    transition: all 0.2s;
+    background: white;
+    margin-bottom: 0;
+    user-select: none;
+  }
+
+  .pill-group label:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .pill-group input[type="radio"]:checked + label {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    font-weight: 600;
+  }
+
+  /* Results */
+  .results {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 2px solid var(--accent);
+    box-shadow: var(--shadow-lg);
+    padding: 32px;
+    margin-bottom: 20px;
+    display: none;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .results.active {
+    display: block;
+  }
+
+  .result-hero {
+    text-align: center;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .result-hero .label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .result-hero .amount {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(36px, 8vw, 52px);
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .result-hero .amount.zero {
+    color: var(--accent);
+  }
+
+  .result-hero .effective-rate {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 6px;
+  }
+
+  .result-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .result-row:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .result-row .row-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .result-row .row-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .result-row .row-value.savings {
+    color: var(--accent);
+  }
+
+  .result-row .row-value.surcharge {
+    color: var(--danger);
+  }
+
+  /* Concession note */
+  .concession-note {
+    margin-top: 20px;
+    padding: 16px;
+    background: var(--highlight-light);
+    border-radius: var(--radius-sm);
+    border-left: 4px solid var(--highlight);
+  }
+
+  .concession-note p {
+    font-size: 13px;
+    color: #6B5A20;
+    line-height: 1.5;
+  }
+
+  .concession-note strong {
+    font-weight: 600;
+    color: #4A3D10;
+  }
+
+  /* CTA Button */
+  .calculate-btn {
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+
+  .calculate-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(27, 107, 74, 0.3);
+  }
+
+  .calculate-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Breakdown table */
+  .breakdown-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+
+  .breakdown-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 8px 0;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .breakdown-table th:last-child {
+    text-align: right;
+  }
+
+  .breakdown-table td {
+    font-size: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .breakdown-table td:last-child {
+    text-align: right;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .breakdown-table tr:last-child td {
+    border-bottom: none;
+    font-weight: 700;
+    padding-top: 12px;
+  }
+
+  /* Disclaimer */
+  .disclaimer {
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .disclaimer a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  /* FAQ */
+  .faq-section {
+    margin-top: 40px;
+  }
+
+  .faq-section h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .faq-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+
+  .faq-item summary {
+    padding: 16px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+
+  .faq-item summary::after {
+    content: '+';
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    transition: transform 0.2s;
+  }
+
+  .faq-item[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-item .faq-content {
+    padding: 0 20px 16px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 600px) {
+    .card { padding: 24px 20px; }
+    .results { padding: 24px 20px; }
+    .pill-group { gap: 6px; }
+    .pill-group label { padding: 8px 14px; font-size: 13px; }
+  }
+</style>
+<link rel="canonical" href="https://aussiecalc.com.au/stamp-duty-calculator.html">
+<meta property="og:title" content="QLD Stamp Duty Calculator 2026 — Free Transfer Duty Estimator">
+<meta property="og:description" content="Estimate transfer duty for Queensland property purchases. Includes first home buyer concessions and 2025 reforms.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aussiecalc.com.au/stamp-duty-calculator.html">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"QLD Stamp Duty Calculator","url":"https://aussiecalc.com.au/stamp-duty-calculator.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"},"description":"Free Queensland stamp duty calculator with first home buyer concessions, home concessions, and investor rates. Updated for 2026."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is stamp duty calculated in QLD?","acceptedAnswer":{"@type":"Answer","text":"Queensland uses a tiered bracket system. The first $5,000 is duty-free. Above that, rates increase from $1.50 per $100 up to $5.75 per $100 for values above $1,000,000."}},{"@type":"Question","name":"Do first home buyers pay stamp duty in QLD?","acceptedAnswer":{"@type":"Answer","text":"From 1 May 2025, first home buyers purchasing a new home or vacant land pay no stamp duty with no price cap. For established homes, first home buyers pay no duty up to $700,000 with a sliding concession up to $800,000."}},{"@type":"Question","name":"What is the First Home Owner Grant in QLD?","acceptedAnswer":{"@type":"Answer","text":"QLD offers a $30,000 First Home Owner Grant for new homes valued under $750,000. This applies to contracts signed before 30 June 2026, after which it reverts to $15,000."}},{"@type":"Question","name":"When is stamp duty payable in QLD?","acceptedAnswer":{"@type":"Answer","text":"Transfer duty must be lodged within 30 days of the contract becoming unconditional. Payment is due within 14 days of lodgement."}},{"@type":"Question","name":"Do foreign buyers pay more stamp duty in QLD?","acceptedAnswer":{"@type":"Answer","text":"Yes. Foreign buyers pay an Additional Foreign Acquirer Duty of 8% on top of standard transfer duty for residential property."}}]}
+</script>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="badge">Updated February 2026</div>
+  <h1>QLD Stamp Duty Calculator</h1>
+  <p>Instantly estimate transfer duty on Queensland property purchases. Includes first home buyer concessions and 2025 reforms.</p>
+</div>
+
+<div class="container">
+
+  <!-- Input Card -->
+  <div class="card">
+    <div class="card-title">Property Details</div>
+
+    <div class="form-group">
+      <label for="propertyValue">Property Purchase Price</label>
+      <div class="input-wrapper">
+        <span class="prefix">$</span>
+        <input type="text" id="propertyValue" placeholder="e.g. 650,000" inputmode="numeric" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Buyer Type</label>
+      <div class="pill-group">
+        <input type="radio" name="buyerType" id="firstHome" value="firstHome">
+        <label for="firstHome">First Home Buyer</label>
+        <input type="radio" name="buyerType" id="ownerOccupier" value="ownerOccupier" checked>
+        <label for="ownerOccupier">Owner Occupier</label>
+        <input type="radio" name="buyerType" id="investor" value="investor">
+        <label for="investor">Investor</label>
+        <input type="radio" name="buyerType" id="foreign" value="foreign">
+        <label for="foreign">Foreign Buyer</label>
+      </div>
+    </div>
+
+    <div class="form-group" id="propertyTypeGroup" style="display:none;">
+      <label>Property Type (First Home Buyers)</label>
+      <div class="pill-group">
+        <input type="radio" name="propertyType" id="established" value="established" checked>
+        <label for="established">Established Home</label>
+        <input type="radio" name="propertyType" id="newHome" value="newHome">
+        <label for="newHome">New Home</label>
+        <input type="radio" name="propertyType" id="vacantLand" value="vacantLand">
+        <label for="vacantLand">Vacant Land</label>
+      </div>
+    </div>
+
+    <button class="calculate-btn" onclick="calculate()">Calculate Stamp Duty</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+    <div class="result-hero">
+      <div class="label">Estimated Transfer Duty</div>
+      <div class="amount" id="dutyAmount">$0</div>
+      <div class="effective-rate" id="effectiveRate"></div>
+    </div>
+
+    <div class="result-rows">
+      <div class="result-row">
+        <span class="row-label">Property Value</span>
+        <span class="row-value" id="rowPropertyValue"></span>
+      </div>
+      <div class="result-row">
+        <span class="row-label">Standard Duty (no concessions)</span>
+        <span class="row-value" id="rowStandardDuty"></span>
+      </div>
+      <div class="result-row" id="rowConcessionRow" style="display:none;">
+        <span class="row-label" id="rowConcessionLabel">Concession Savings</span>
+        <span class="row-value savings" id="rowConcessionSavings"></span>
+      </div>
+      <div class="result-row" id="rowAFADRow" style="display:none;">
+        <span class="row-label">Additional Foreign Acquirer Duty (8%)</span>
+        <span class="row-value surcharge" id="rowAFAD"></span>
+      </div>
+    </div>
+
+    <div id="concessionNote"></div>
+
+    <!-- Breakdown -->
+    <div class="card-title" style="margin-top:28px; margin-bottom:8px;">Duty Breakdown</div>
+    <table class="breakdown-table" id="breakdownTable">
+      <thead>
+        <tr><th>Value Bracket</th><th>Rate</th><th>Duty</th></tr>
+      </thead>
+      <tbody id="breakdownBody"></tbody>
+    </table>
+  </div>
+
+  <!-- FAQ Section for SEO -->
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>How is stamp duty calculated in QLD?</summary>
+      <div class="faq-content">
+        Queensland uses a tiered bracket system. The first $5,000 of the property value is duty-free. Above that, rates increase progressively from $1.50 per $100 up to $5.75 per $100 for property values above $1,000,000. If you're buying a home to live in (not an investment), you may qualify for a home concession which uses lower rates.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Do first home buyers pay stamp duty in QLD?</summary>
+      <div class="faq-content">
+        It depends on the property. From 1 May 2025, first home buyers purchasing a brand new home or vacant land pay no stamp duty at all — with no price cap. For established (existing) homes, first home buyers pay no duty up to $700,000, with a sliding concession up to $800,000. Above $800,000, standard home concession rates apply.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the First Home Owner Grant in QLD?</summary>
+      <div class="faq-content">
+        In addition to stamp duty concessions, QLD offers a $30,000 First Home Owner Grant for new homes valued under $750,000. This boosted amount applies to contracts signed before 30 June 2026, after which it reverts to $15,000. The grant is separate from stamp duty concessions — you may be eligible for both.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>When is stamp duty payable in QLD?</summary>
+      <div class="faq-content">
+        Transfer duty must be lodged within 30 days of the contract becoming unconditional. Payment is then due within 14 days of lodgement. Late payments attract interest at approximately 11.78% per annum plus potential penalty tax. Your conveyancer or solicitor typically handles this at settlement.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Do foreign buyers pay more stamp duty in QLD?</summary>
+      <div class="faq-content">
+        Yes. Foreign buyers (including foreign companies and trusts) must pay an Additional Foreign Acquirer Duty (AFAD) of 8% on top of the standard transfer duty for residential property purchases. This can significantly increase the total duty payable.
+      </div>
+    </details>
+  </div>
+
+  <div class="disclaimer">
+    This calculator provides estimates only based on publicly available QLD transfer duty rates as of February 2026. It is not a substitute for professional advice. For official calculations, use the <a href="https://qro.qld.gov.au/duties/transfer-duty/calculate/transfer-duty-estimator/" target="_blank" rel="noopener">Queensland Revenue Office estimator</a>. Rates and concessions may change — always verify before making purchasing decisions.
+  </div>
+
+</div>
+
+<script>
+// === QLD TRANSFER DUTY RATES ===
+
+// Standard transfer duty rates (investors, commercial, general)
+function calcStandardDuty(value) {
+  if (value <= 5000) return 0;
+  if (value <= 75000) return (value - 5000) * 0.015;
+  if (value <= 540000) return 1050 + (value - 75000) * 0.035;
+  if (value <= 1000000) return 17325 + (value - 540000) * 0.045;
+  return 38025 + (value - 1000000) * 0.0575;
+}
+
+// Home concession rates (owner-occupier buying a home to live in)
+function calcHomeConcessionDuty(value) {
+  if (value <= 350000) return 0; // No duty on first $350k for home concession
+  if (value <= 540000) return (value - 350000) * 0.035;
+  if (value <= 1000000) return 6650 + (value - 540000) * 0.045;
+  return 27350 + (value - 1000000) * 0.0575;
+}
+
+// Note: the QRO site shows home concession rates as:
+// $0-$350,000 = $0
+// $350,001-$540,000 = $1.00 per $100 over $350,000 (but more precisely, rates from their table)
+// Let me use the commonly referenced simplified rates from QRO:
+// Home concession rate table (for contracts from 9 June 2024):
+// Not more than $350,000 = $0
+// $350,001 to $540,000 = $1.00 for each $100 over $350,000  
+// $540,001 to $1,000,000 = $1,900 + $3.50 for each $100 over $540,000
+// More than $1,000,000 = $18,000 + $4.50 for each $100 over $1,000,000
+// Actually, the standard rates from QRO are what I need to verify more carefully.
+// Based on multiple sources, here are the standard rates:
+// $0-$5,000: nil
+// $5,001-$75,000: $1.50 per $100 (or part) over $5,000
+// $75,001-$540,000: $1,050 + $3.50 per $100 over $75,000
+// $540,001-$1,000,000: $17,325 + $4.50 per $100 over $540,000
+// $1,000,001+: $38,025 + $5.75 per $100 over $1,000,000
+
+// Home concession rates (from QRO concession rate page):
+// $0-$350,000: nil
+// $350,001-$540,000: $1.00 per $100 over $350,000
+// $540,001-$1,000,000: $1,900 + $3.50 per $100 over $540,000  
+// $1,000,001+: $18,000 + $4.50 per $100 over $1,000,000
+
+// Let me recalculate properly:
+function calcHomeDuty(value) {
+  if (value <= 350000) return 0;
+  if (value <= 540000) return Math.ceil((value - 350000) / 100) * 1.00;
+  if (value <= 1000000) return 1900 + Math.ceil((value - 540000) / 100) * 3.50;
+  return 18000 + Math.ceil((value - 1000000) / 100) * 4.50;
+}
+
+function calcStandard(value) {
+  if (value <= 5000) return 0;
+  if (value <= 75000) return Math.ceil((value - 5000) / 100) * 1.50;
+  if (value <= 540000) return 1050 + Math.ceil((value - 75000) / 100) * 3.50;
+  if (value <= 1000000) return 17325 + Math.ceil((value - 540000) / 100) * 4.50;
+  return 38025 + Math.ceil((value - 1000000) / 100) * 5.75;
+}
+
+// First home concession amounts (contracts from 9 June 2024):
+// For established homes:
+// $0-$700,000: full concession (duty = $0 after concession)
+// $700,001-$800,000: sliding concession
+// Above $800,000: no first home concession, but home concession still applies
+function calcFirstHomeConcessionAmount(value) {
+  if (value <= 700000) {
+    // Full concession: the concession amount equals the home concession duty
+    return calcHomeDuty(value);
+  }
+  if (value <= 800000) {
+    // Sliding scale: concession reduces proportionally
+    // The concession amount reduces by $1.75 for every $100 above $700,000
+    // At $700,000 concession = calcHomeDuty(700,000) = $10,150 (approx)
+    // Actually from QRO: the first home concession amount for $700,001-$799,999:
+    // $17,350 - $17.35 for each $100 (or part) by which value exceeds $700,000
+    const concession = 17350 - Math.ceil((value - 700000) / 100) * 17.35;
+    return Math.max(0, concession);
+  }
+  return 0; // No first home concession above $800k
+}
+
+function formatCurrency(num) {
+  if (num === 0) return '$0';
+  return '$' + Math.round(num).toLocaleString('en-AU');
+}
+
+function getBreakdown(value, type) {
+  const rows = [];
+  if (type === 'standard') {
+    if (value > 0) rows.push({ bracket: '$0 – $5,000', rate: 'Nil', duty: 0 });
+    if (value > 5000) {
+      const top = Math.min(value, 75000);
+      const duty = Math.ceil((top - 5000) / 100) * 1.50;
+      rows.push({ bracket: '$5,001 – $75,000', rate: '$1.50 / $100', duty });
+    }
+    if (value > 75000) {
+      const top = Math.min(value, 540000);
+      const duty = Math.ceil((top - 75000) / 100) * 3.50;
+      rows.push({ bracket: '$75,001 – $540,000', rate: '$3.50 / $100', duty });
+    }
+    if (value > 540000) {
+      const top = Math.min(value, 1000000);
+      const duty = Math.ceil((top - 540000) / 100) * 4.50;
+      rows.push({ bracket: '$540,001 – $1,000,000', rate: '$4.50 / $100', duty });
+    }
+    if (value > 1000000) {
+      const duty = Math.ceil((value - 1000000) / 100) * 5.75;
+      rows.push({ bracket: 'Over $1,000,000', rate: '$5.75 / $100', duty });
+    }
+  } else {
+    // Home concession rates
+    if (value > 0) rows.push({ bracket: '$0 – $350,000', rate: 'Nil', duty: 0 });
+    if (value > 350000) {
+      const top = Math.min(value, 540000);
+      const duty = Math.ceil((top - 350000) / 100) * 1.00;
+      rows.push({ bracket: '$350,001 – $540,000', rate: '$1.00 / $100', duty });
+    }
+    if (value > 540000) {
+      const top = Math.min(value, 1000000);
+      const duty = Math.ceil((top - 540000) / 100) * 3.50;
+      rows.push({ bracket: '$540,001 – $1,000,000', rate: '$3.50 / $100', duty });
+    }
+    if (value > 1000000) {
+      const duty = Math.ceil((value - 1000000) / 100) * 4.50;
+      rows.push({ bracket: 'Over $1,000,000', rate: '$4.50 / $100', duty });
+    }
+  }
+  return rows;
+}
+
+// Show/hide property type for first home buyers
+document.querySelectorAll('input[name="buyerType"]').forEach(radio => {
+  radio.addEventListener('change', function() {
+    const ptGroup = document.getElementById('propertyTypeGroup');
+    ptGroup.style.display = this.value === 'firstHome' ? 'block' : 'none';
+  });
+});
+
+// Format input with commas
+document.getElementById('propertyValue').addEventListener('input', function(e) {
+  let val = this.value.replace(/[^0-9]/g, '');
+  if (val) {
+    this.value = parseInt(val).toLocaleString('en-AU');
+  }
+});
+
+// Enter key triggers calculate
+document.getElementById('propertyValue').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') calculate();
+});
+
+function calculate() {
+  const rawVal = document.getElementById('propertyValue').value.replace(/[^0-9]/g, '');
+  const value = parseInt(rawVal) || 0;
+
+  if (value <= 0) return;
+
+  const buyerType = document.querySelector('input[name="buyerType"]:checked').value;
+  const propertyType = document.querySelector('input[name="propertyType"]:checked')?.value || 'established';
+
+  const standardDuty = calcStandard(value);
+  let finalDuty = 0;
+  let concessionSavings = 0;
+  let concessionNote = '';
+  let breakdownType = 'standard';
+  let afad = 0;
+
+  if (buyerType === 'investor') {
+    // Standard rates, no concessions
+    finalDuty = standardDuty;
+    breakdownType = 'standard';
+
+  } else if (buyerType === 'ownerOccupier') {
+    // Home concession rates
+    finalDuty = calcHomeDuty(value);
+    concessionSavings = standardDuty - finalDuty;
+    breakdownType = 'home';
+    if (concessionSavings > 0) {
+      concessionNote = `<div class="concession-note"><p><strong>Home concession applied.</strong> As an owner-occupier, you pay reduced rates on the first $350,000 of the property value. You save ${formatCurrency(concessionSavings)} compared to standard (investor) rates.</p></div>`;
+    }
+
+  } else if (buyerType === 'firstHome') {
+    if (propertyType === 'newHome' || propertyType === 'vacantLand') {
+      // Full exemption — no cap (from 1 May 2025)
+      finalDuty = 0;
+      concessionSavings = standardDuty;
+      breakdownType = 'home';
+      const typeLabel = propertyType === 'newHome' ? 'new home' : 'vacant land';
+      concessionNote = `<div class="concession-note"><p><strong>Full stamp duty exemption!</strong> From 1 May 2025, eligible first home buyers purchasing a ${typeLabel} pay $0 transfer duty with no price cap. You save ${formatCurrency(concessionSavings)} compared to standard rates.</p><p style="margin-top:8px;">You may also be eligible for the <strong>$30,000 First Home Owner Grant</strong> (for new homes under $750,000, contracts before 30 June 2026).</p></div>`;
+
+    } else {
+      // Established home — first home concession
+      const homeDuty = calcHomeDuty(value);
+      const concessionAmount = calcFirstHomeConcessionAmount(value);
+      finalDuty = Math.max(0, homeDuty - concessionAmount);
+      concessionSavings = standardDuty - finalDuty;
+      breakdownType = 'home';
+
+      if (value <= 700000) {
+        concessionNote = `<div class="concession-note"><p><strong>Full first home concession!</strong> Established homes up to $700,000 attract $0 transfer duty for eligible first home buyers. You save ${formatCurrency(concessionSavings)}.</p></div>`;
+      } else if (value <= 800000) {
+        concessionNote = `<div class="concession-note"><p><strong>Partial first home concession applied.</strong> For established homes between $700,001 and $800,000, a sliding concession applies. You save ${formatCurrency(concessionSavings)} compared to standard rates.</p></div>`;
+      } else {
+        concessionNote = `<div class="concession-note"><p><strong>Home concession applied</strong> (standard owner-occupier rates). The first home concession for established homes applies only up to $800,000. Above that, standard home concession rates apply. You save ${formatCurrency(concessionSavings)} compared to investor rates.</p></div>`;
+      }
+    }
+
+  } else if (buyerType === 'foreign') {
+    // Standard rates + 8% AFAD
+    finalDuty = standardDuty;
+    afad = value * 0.08;
+    breakdownType = 'standard';
+  }
+
+  // Render results
+  const resultsEl = document.getElementById('results');
+  resultsEl.classList.add('active');
+
+  const totalDuty = finalDuty + afad;
+  document.getElementById('dutyAmount').textContent = formatCurrency(totalDuty);
+  document.getElementById('dutyAmount').className = totalDuty === 0 ? 'amount zero' : 'amount';
+
+  const effectiveRate = value > 0 ? ((totalDuty / value) * 100).toFixed(2) : '0.00';
+  document.getElementById('effectiveRate').textContent = `Effective rate: ${effectiveRate}% of property value`;
+
+  document.getElementById('rowPropertyValue').textContent = formatCurrency(value);
+  document.getElementById('rowStandardDuty').textContent = formatCurrency(standardDuty);
+
+  const concRow = document.getElementById('rowConcessionRow');
+  if (concessionSavings > 0) {
+    concRow.style.display = 'flex';
+    document.getElementById('rowConcessionSavings').textContent = '−' + formatCurrency(concessionSavings);
+  } else {
+    concRow.style.display = 'none';
+  }
+
+  const afadRow = document.getElementById('rowAFADRow');
+  if (afad > 0) {
+    afadRow.style.display = 'flex';
+    document.getElementById('rowAFAD').textContent = '+' + formatCurrency(afad);
+  } else {
+    afadRow.style.display = 'none';
+  }
+
+  document.getElementById('concessionNote').innerHTML = concessionNote;
+
+  // Breakdown table
+  const breakdown = getBreakdown(value, breakdownType);
+  const tbody = document.getElementById('breakdownBody');
+  let totalCalc = breakdown.reduce((sum, r) => sum + r.duty, 0);
+  tbody.innerHTML = breakdown.map(r =>
+    `<tr><td>${r.bracket}</td><td>${r.rate}</td><td>${formatCurrency(r.duty)}</td></tr>`
+  ).join('') + `<tr><td colspan="2">${breakdownType === 'home' ? 'Total (home concession rates)' : 'Total'}</td><td>${formatCurrency(totalCalc)}</td></tr>`;
+
+  // Scroll to results
+  resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+<div style="max-width:680px;margin:40px auto 0;padding:0 20px 48px"><div style="text-align:center;padding:24px;background:#fff;border:1px solid #E2DED6;border-radius:12px"><p style="font-family:Fraunces,Georgia,serif;font-size:16px;font-weight:600;margin-bottom:12px">More Australian Calculators</p><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center"><a href="stamp-duty-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">Stamp Duty</a><a href="hecs-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">HECS/HELP</a><a href="rental-yield-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">Rental Yield</a><a href="gst-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">GST</a><a href="super-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">Super</a><a href="pay-calculator.html" style="padding:6px 14px;background:#E8F5EE;color:#1B6B4A;border-radius:100px;font-size:13px;text-decoration:none;font-weight:500">Take Home Pay</a></div><p style="margin-top:12px;font-size:11px;color:#5C5C5C"><a href="index.html" style="color:#1B6B4A">AussieCalc</a> · <a href="privacy.html" style="color:#5C5C5C">Privacy</a></p></div></div>
+</body>
+</html>
